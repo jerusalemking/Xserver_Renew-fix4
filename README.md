@@ -3,16 +3,6 @@
 自动延长 XServer Game 实例期限，支持多账号、代理和 Telegram 通知。采用**自适应智能调度**，自动感知剩余时间并决策最优签到时机。
 修改为48小时适配版本，最短16小时可以续签，并且缩短伏击模式，延长紧急模式到12小时
 
----
-EML_1
-frsrew@qiangguo-xuexi.eu.org
-fly@xuexi365.eu.org
-PWD_1
-yJvk8!sJS-ipbp.
-TG_TOKEN
-5157227748:AAHtpr9jrPiL1Mv-cvIY4DjKI5Y-QKku7Yo
-TG_ID
-1623644869
 ## 前期准备：关闭邮件验证功能
 
 > ⚠️ **重要**：请严格按照以下步骤操作，否则脚本可能因邮件验证而失败。
