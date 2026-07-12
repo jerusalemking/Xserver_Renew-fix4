@@ -1,7 +1,7 @@
 name: XServer Extend (Node.js Matrix)
 
 on:
-  workflow_dispatch:
+  repository_dispatch:
   
   schedule:
     - cron: '8 * * * *'
