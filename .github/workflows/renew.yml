@@ -14,6 +14,7 @@ on:
 
 permissions:
   contents: write
+  actions: write # ⚠️ 注意：删除运行记录必须追加这个权限
 
 jobs:
   setup:
@@ -145,3 +146,16 @@ jobs:
             git commit -m "chore: Update status.json for ${{ matrix.account_index }} [skip ci]" || echo "No changes"
             git push
           fi
+# ─── 新增清理任务 ───
+  cleanup:
+    needs: renew
+    runs-on: ubuntu-latest
+    if: always() # 确保前面的账号无论成功还是失败，最后都会执行清理
+    steps:
+      - name: Delete old workflow runs
+        uses: Mattraks/delete-workflow-runs@v2
+        with:
+          token: ${{ github.token }}
+          repository: ${{ github.repository }}
+          retain_days: 0          # 不按天数筛选
+          keep_minimum_runs: 6    # 核心：无论如何只保留最新的 6 条记录
