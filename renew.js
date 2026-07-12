@@ -229,16 +229,16 @@ async function tryRenew(page, beforeMins) {
     } else {
       var h = totalMins / 60;
 
-      if (h > 16) {
+      if (h > 5) {
         // 探测模式：距离进入续签窗口（<16h）还有多久，提前2h到达
-        var hoursUntilWindow = h - 16 - 2;
+        var hoursUntilWindow = h - 4 - 1;
         var skipDays = Math.max(1, Math.floor(hoursUntilWindow / 24));
         console.log('🔭 探测模式: 剩余' + h.toFixed(1) + 'h，距续签窗口还有' + hoursUntilWindow.toFixed(1) + 'h，预约' + skipDays + '天后检查');
         await sendTG('🔭', '探测跳过', '剩余' + h.toFixed(1) + 'h，距窗口' + hoursUntilWindow.toFixed(1) + 'h，' + skipDays + '天后检查', '3_game_manage.png');
         updateNextCheckDate(skipDays, '探测模式，距窗口' + hoursUntilWindow.toFixed(1) + 'h');
-      } else if (h > 12) {
+      } else if (h > 4) {
         // 伏击模式：在续签窗口内（12h~16h），随机延迟0~2h后续签
-        var maxDelaySec = 2 * 3600;
+        var maxDelaySec = 10;
         var delay = Math.floor(Math.random() * maxDelaySec);
         console.log('🎯 伏击模式: 剩余' + h.toFixed(1) + 'h，随机延迟' + formatSeconds(delay) + '后续签');
         await sendTG('🎯', '伏击模式', '剩余' + h.toFixed(1) + 'h，' + formatSeconds(delay) + '后执行');
