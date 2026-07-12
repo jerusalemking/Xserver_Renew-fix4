@@ -1,11 +1,17 @@
 name: XServer Extend (Node.js Matrix)
 
 on:
+  # 1. 完善 Cloudflare 触发配置
   repository_dispatch:
+    types: [cloudflare_cron_trigger]
   
+  # 2. 保留原有的 GitHub 自带定时（每小时第 8 分钟触发）
   schedule:
     - cron: '8 * * * *'
   
+  # 3. 强烈建议加上这个，方便你在 GitHub 网页上随时手动点按钮测试
+  workflow_dispatch:
+
 permissions:
   contents: write
 
@@ -17,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      
+      # 后面保持你原有的 set-matrix 步骤不变...
 
       - name: Generate account list
         id: set-matrix
